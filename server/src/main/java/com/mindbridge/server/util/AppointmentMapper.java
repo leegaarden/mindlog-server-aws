@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppointmentMapper {
 
+    private final RecordMapper recordMapper;
+
+    public AppointmentMapper(RecordMapper recordMapper) {
+        this.recordMapper = recordMapper;
+    }
+
     // Appointment -> AppointmentDTO
     public AppointmentDTO toDTO(Appointment appointment) {
 
@@ -18,7 +24,11 @@ public class AppointmentMapper {
         appointmentDTO.setEndTime(appointment.getEndTime());
         appointmentDTO.setDoctorName(appointment.getDoctorName());
         appointmentDTO.setHospital(appointment.getHospital());
-        appointmentDTO.setMemo((appointment.getMemo()));
+        appointmentDTO.setMemo(appointment.getMemo());
+
+        if (appointment.getRecord() != null) {
+            appointmentDTO.setRecordDTO(recordMapper.toDTO(appointment.getRecord()));
+        }
 
         return appointmentDTO;
     }
@@ -35,6 +45,11 @@ public class AppointmentMapper {
         appointment.setDoctorName(appointmentDTO.getDoctorName());
         appointment.setHospital(appointmentDTO.getHospital());
         appointment.setMemo((appointmentDTO.getMemo()));
+
+        if (appointmentDTO.getRecordDTO() != null) {
+            appointment.setRecord(recordMapper.toEntity(appointmentDTO.getRecordDTO()));
+        }
+
 
         return appointment;
     }

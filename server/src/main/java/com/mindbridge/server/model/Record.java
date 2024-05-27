@@ -12,13 +12,14 @@ public class Record {
     private Long id;
 
     // 파일 위치
+    @Column(columnDefinition = "TEXT NOT NULL")
     private String filePath;
 
     // 요약 내용 추가
     private String summary;
 
     // appointment 연관 관계 매핑
-    @OneToOne(mappedBy = "record", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "record", cascade = CascadeType.ALL)
     private Appointment appointment;
 
     // default 생성자
@@ -55,5 +56,13 @@ public class Record {
 
     public void setSummary (String summary) {
         this.summary = summary;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 }

@@ -13,21 +13,27 @@ public class Appointment {
     private Long id;
 
     // 진료 일정
+    @Column(nullable = false)
     private Date date;
 
     // 시작 시간
+    @Column(nullable = false)
     private LocalTime startTime;
 
     // 종료 시간
+    @Column(nullable = false)
     private LocalTime endTime;
 
     // 주치의
+    @Column(nullable = true)
     private String doctorName;
 
     // 병원
+    @Column(nullable = true)
     private String hospital;
 
     // 메모
+    @Column(columnDefinition = "TEXT")
     private String memo;
 
     // record와 연관 관계 매핑

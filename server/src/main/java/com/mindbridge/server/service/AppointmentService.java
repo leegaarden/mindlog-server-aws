@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,20 +29,20 @@ public class AppointmentService {
                 .collect(Collectors.toList());
     }
 
-    // 감정 기록 추가
+    // 진료 추가
     public AppointmentDTO addAppointment(AppointmentDTO appointmentDTO) {
         Appointment appointment = appointmentMapper.toEntity(appointmentDTO);
         Appointment savedAppointment = appointmentRepository.save(appointment);
         return appointmentMapper.toDTO(savedAppointment);
     }
 
-    // 감정 기록 조회 (개별)
+    // 진료 조회 (개별)
     public AppointmentDTO getAppointmentById(Long id) {
         Appointment appointment = appointmentRepository.findById(id).orElse(null);
         return appointment != null ? appointmentMapper.toDTO(appointment) : null;
     }
 
-    // 감정 기록 조회 (날짜)
+    // 진료 조회 (날짜)
     public List<AppointmentDTO> getAppointmentsByDate(Date date) {
         List<Appointment> appointments = appointmentRepository.findByDate(date);
         return appointments.stream()
@@ -49,8 +50,7 @@ public class AppointmentService {
                 .collect(Collectors.toList());
     }
 
-
-    // 감정 기록 수정
+    // 진료 수정
     public AppointmentDTO updateAppointment(Long id, AppointmentDTO appointmentDTO) {
         if (appointmentRepository.existsById(id)) {
             Appointment appointment = appointmentMapper.toEntity(appointmentDTO);
@@ -62,7 +62,7 @@ public class AppointmentService {
         }
     }
 
-    // 감정 기록 삭제
+    // 진료 삭제
     public void deleteAppointment(Long id) {
         Appointment appointment = appointmentRepository.findById(id).orElse(null);
         RecordService recordService = new RecordService();
@@ -77,4 +77,10 @@ public class AppointmentService {
 //    public void deleteAppointment(Long id) {
 //        appointmentRepository.deleteById(id);
 //    }
+
+    // 진료 조회 (녹음)
+    public AppointmentDTO getAppointmentByRecordId(Long recordId) {
+        Optional<Appointment> appointment = appointmentRepository.findByRecordId(recordId);
+        return appointment.map(appointmentMapper::toDTO).orElse(null);
+    }
 }

@@ -7,8 +7,15 @@ import org.springframework.data.repository.query.Param;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
+
+    // 날짜로 조회
     @Query("SELECT a FROM Appointment a WHERE a.date = :date")
     List<Appointment> findByDate(@Param("date") Date date);
+
+    // 녹음 아이디로 조회
+    @Query("SELECT a FROM Appointment a WHERE a.record.id = :recordId")
+    Optional<Appointment> findByRecordId(@Param("recordId") Long recordId);
 }

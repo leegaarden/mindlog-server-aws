@@ -16,28 +16,36 @@ public class Mindlog {
     private Long id;
 
     // 날짜
+    @Column(columnDefinition = "TEXT NOT NULL")
     private Date date;
 
     // 작성 시간
+    @Column(columnDefinition = "TEXT NOT NULL")
     private LocalTime time;
 
     // 감정 리스트
+    @Column(nullable = false)
     @Convert(converter = StringListConverter.class)
     private List<String> moods = new ArrayList<>();
 
     // 기분 색
+    @Column(nullable = false)
     private int moodColor;
 
     // 제목
+    @Column(columnDefinition = "TEXT NOT NULL")
     private String title;
 
     // 감정 기록 내용
+    @Column(columnDefinition = "TEXT NOT NULL")
     private String emotionRecord;
 
     // 이벤트 기록 내용
+    @Column(columnDefinition = "TEXT NOT NULL")
     private String eventRecord;
 
     // 질문 기록 내용
+    @Column(columnDefinition = "TEXT NOT NULL")
     private String questionRecord;
 
     // default 생성자

@@ -21,4 +21,5 @@ public class AppointmentDTO {
     private String doctorName;
     private String hospital;
     private String memo;
+    private RecordDTO recordDTO;
 }

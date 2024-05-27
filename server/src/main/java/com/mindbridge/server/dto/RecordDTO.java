@@ -14,4 +14,5 @@ public class RecordDTO {
     private Long id;
     private String filePath;
     private String summary;
+    private AppointmentDTO appointmentDTO;
 }
