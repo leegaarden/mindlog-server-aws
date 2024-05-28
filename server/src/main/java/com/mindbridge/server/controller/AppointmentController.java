@@ -1,7 +1,8 @@
 package com.mindbridge.server.controller;
 
 import com.mindbridge.server.dto.AppointmentDTO;
-import com.mindbridge.server.model.Appointment;
+import com.mindbridge.server.dto.RecordDTO;
+import com.mindbridge.server.model.Record;
 import com.mindbridge.server.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,6 +80,13 @@ public class AppointmentController {
         System.out.println("진료 조회(녹음): " + recordId);
         return appointmentDTO;
     }
+
+    // 진료에 해당하는 녹음 추가
+    @PostMapping("/{appointmentId}/record")
+    public AppointmentDTO addRecordToAppointment(@PathVariable Long appointmentId, @RequestBody RecordDTO recordDTO) {
+        return appointmentService.addRecordToAppointment(appointmentId, recordDTO);
+    }
+
     // 진료 수정
     @PutMapping("/{id}")
     public AppointmentDTO updateAppointment(@PathVariable Long id, @RequestBody AppointmentDTO appointmentDTO) {
@@ -100,6 +108,5 @@ public class AppointmentController {
         System.out.println("감정 기록 삭제 ID: " + id);
         appointmentService.deleteAppointment(id);
     }
-
 
 }

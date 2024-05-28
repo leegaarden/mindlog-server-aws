@@ -1,11 +1,16 @@
 package com.mindbridge.server.service;
 
+import com.mindbridge.server.dto.AppointmentDTO;
 import com.mindbridge.server.dto.RecordDTO;
+import com.mindbridge.server.model.Appointment;
 import com.mindbridge.server.model.Record;
 import com.mindbridge.server.repository.RecordRepository;
 import com.mindbridge.server.util.RecordMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecordService {
@@ -24,6 +29,14 @@ public class RecordService {
         Record record = recordMapper.toEntity(recordDTO);
         Record savedRecord = recordRepository.save(record);
         return recordMapper.toDTO(savedRecord);
+    }
+
+    // 전부 조회
+    public List<RecordDTO> getAllRecords() {
+        List<Record> records = recordRepository.findAll();
+        return records.stream()
+                .map(recordMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     // 녹음 조회 (개별)

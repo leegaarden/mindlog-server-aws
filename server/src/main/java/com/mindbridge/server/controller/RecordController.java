@@ -1,6 +1,8 @@
 package com.mindbridge.server.controller;
 
+import com.mindbridge.server.dto.AppointmentDTO;
 import com.mindbridge.server.dto.RecordDTO;
+import com.mindbridge.server.model.Appointment;
 import com.mindbridge.server.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/record")
@@ -18,6 +21,12 @@ public class RecordController {
 
     @Autowired
     private RecordService recordService;
+
+    @GetMapping
+    public List<RecordDTO> getAllRecords() {
+        return recordService.getAllRecords();
+    }
+
 
     // 녹음 생성
     @PostMapping
@@ -31,13 +40,14 @@ public class RecordController {
         }
     }
 
+
     // 녹음 재생(조회)
     @GetMapping("/{id}")
     public RecordDTO getRecordById(@PathVariable Long id) {
         return recordService.getRecordById(id);
     }
 
-    // 녹음 재생 ( appoinment 개별 조회했을 때 path 드림 -> 걍 path만 드리면
+    // 녹음 재생 ( appoinment 개별 조회했을 때 path 전달 -> 걍 path만 전달
 //    @GetMapping(value = "/{id}/play", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 //    public ResponseEntity<byte[]> playRecord(@PathVariable Long id) {
 //        byte[] fileContent = recordService.getRecordFileContent(id);
