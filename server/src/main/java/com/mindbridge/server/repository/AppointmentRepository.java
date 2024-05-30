@@ -18,4 +18,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     // 녹음 아이디로 조회
     @Query("SELECT a FROM Appointment a WHERE a.record.id = :recordId")
     Optional<Appointment> findByRecordId(@Param("recordId") Long recordId);
+
+    // 가장 최근의 appointment조회
+    @Query("SELECT a FROM Appointment a ORDER BY a.date DESC, a.startTime DESC")
+    Appointment findTopByOrderByDateDescStartTimeDesc();
+
+    // OpenNLP -> 쿼리문 대신
+
 }

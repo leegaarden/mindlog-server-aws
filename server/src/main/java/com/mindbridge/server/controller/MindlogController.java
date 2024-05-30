@@ -72,6 +72,12 @@ public class MindlogController {
         return mindlogDTOSs;
     }
 
+    // 감정 기록 조회(진료 일정별)
+    @GetMapping("/appointment/{appointmentId}")
+    public List<MindlogDTO> getMindlogsByAppointmentId(@PathVariable Long appointmentId) {
+        return mindlogService.getMindlogsByAppointmentId(appointmentId);
+    }
+
     // 감정 기록 수정
     @PutMapping("/{id}")
     public MindlogDTO updateMindlog(@PathVariable Long id, @RequestBody MindlogDTO mindlogDTO) {

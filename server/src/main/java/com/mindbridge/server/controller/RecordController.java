@@ -3,6 +3,7 @@ package com.mindbridge.server.controller;
 import com.mindbridge.server.dto.AppointmentDTO;
 import com.mindbridge.server.dto.RecordDTO;
 import com.mindbridge.server.model.Appointment;
+import com.mindbridge.server.service.AppointmentService;
 import com.mindbridge.server.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,9 @@ public class RecordController {
     @Autowired
     private RecordService recordService;
 
+    @Autowired
+    private AppointmentService appointmentService;
+
     @GetMapping
     public List<RecordDTO> getAllRecords() {
         return recordService.getAllRecords();
@@ -40,8 +44,22 @@ public class RecordController {
         }
     }
 
+    // 진료에 해당하는 녹음 추가
+    @PostMapping("/{appointmentId}/record")
+    public AppointmentDTO addRecordToAppointment(@PathVariable Long appointmentId, @RequestBody RecordDTO recordDTO) {
 
-    // 녹음 재생(조회)
+        System.out.println("진료에 해당하는 녹음 추가");
+        return appointmentService.addRecordToAppointment(appointmentId, recordDTO);
+    }
+
+    // 녹음 조회
+    @GetMapping("/{appointmentId}/record")
+    public List<AppointmentDTO> getAllRecordToAppointments() {
+        return appointmentService.getAllAppointments();
+    }
+
+
+    // 녹음 재생(조회) -> 이거 아닌듯
     @GetMapping("/{id}")
     public RecordDTO getRecordById(@PathVariable Long id) {
         return recordService.getRecordById(id);

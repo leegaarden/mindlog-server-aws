@@ -22,6 +22,10 @@ public class MindlogMapper {
         mindlogDTO.setEventRecord(mindlog.getEventRecord());
         mindlogDTO.setQuestionRecord(mindlog.getQuestionRecord());
 
+        if (mindlog.getAppointment() != null) {
+            mindlogDTO.setAppointmentId(mindlog.getAppointment().getId());
+        }
+
         return mindlogDTO;
     }
 

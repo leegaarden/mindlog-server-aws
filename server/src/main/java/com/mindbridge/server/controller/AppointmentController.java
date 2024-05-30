@@ -81,11 +81,7 @@ public class AppointmentController {
         return appointmentDTO;
     }
 
-    // 진료에 해당하는 녹음 추가
-    @PostMapping("/{appointmentId}/record")
-    public AppointmentDTO addRecordToAppointment(@PathVariable Long appointmentId, @RequestBody RecordDTO recordDTO) {
-        return appointmentService.addRecordToAppointment(appointmentId, recordDTO);
-    }
+
 
     // 진료 수정
     @PutMapping("/{id}")

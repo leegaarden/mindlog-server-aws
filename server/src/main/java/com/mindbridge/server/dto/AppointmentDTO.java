@@ -22,4 +22,5 @@ public class AppointmentDTO {
     private String hospital;
     private String memo;
     private Long recordId;
+    private MindlogDTO mindlogDTO;
 }

@@ -28,10 +28,6 @@ public class AppointmentMapper {
         appointmentDTO.setHospital(appointment.getHospital());
         appointmentDTO.setMemo(appointment.getMemo());
 
-//        if (appointment.getRecord() != null) {
-//            appointmentDTO.setRecordDTO(recordMapper.toDTO(appointment.getRecord()));
-//        }
-
         if (appointment.getRecord() != null) {
             appointmentDTO.setRecordId(appointment.getRecord().getId());
         }

@@ -1,11 +1,14 @@
 package com.mindbridge.server.model;
 
+import com.mindbridge.server.common.BaseEntity;
 import jakarta.persistence.*;
 import java.time.LocalTime;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Appointment {
+public class Appointment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +43,9 @@ public class Appointment {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "record_id")
     private Record record;
+
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Mindlog> mindlogs = new ArrayList<>();
 
     // default 생성자
     public Appointment() {

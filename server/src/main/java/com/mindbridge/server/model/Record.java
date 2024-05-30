@@ -1,11 +1,12 @@
 package com.mindbridge.server.model;
 
+import com.mindbridge.server.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
-public class Record {
+public class Record extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

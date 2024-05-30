@@ -1,5 +1,6 @@
 package com.mindbridge.server.model;
 
+import com.mindbridge.server.common.BaseEntity;
 import com.mindbridge.server.converter.StringListConverter;
 import jakarta.persistence.*;
 
@@ -9,7 +10,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
-public class Mindlog {
+public class Mindlog extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +48,10 @@ public class Mindlog {
     // 질문 기록 내용
     @Column(columnDefinition = "TEXT NOT NULL")
     private String questionRecord;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "appointment_id", nullable = false)
+    private Appointment appointment;
 
     // default 생성자
     public Mindlog() {
@@ -134,5 +139,13 @@ public class Mindlog {
 
     public void setQuestionRecord(String questionRecord) {
         this.questionRecord = questionRecord;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 }
