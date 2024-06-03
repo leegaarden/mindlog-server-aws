@@ -17,11 +17,11 @@ public class Mindlog extends BaseEntity {
     private Long id;
 
     // 날짜
-    @Column(columnDefinition = "TEXT NOT NULL")
+    @Column(nullable = false)
     private Date date;
 
     // 작성 시간
-    @Column(columnDefinition = "TEXT NOT NULL")
+    @Column(nullable = false)
     private LocalTime time;
 
     // 감정 리스트
