@@ -3,7 +3,11 @@ package com.mindbridge.server.model;
 import com.mindbridge.server.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Data
 public class Record extends BaseEntity {
@@ -33,37 +37,4 @@ public class Record extends BaseEntity {
         this.summary = summary;
     }
 
-    // getter setter
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary (String summary) {
-        this.summary = summary;
-    }
-
-    public Appointment getAppointment() {
-        return appointment;
-    }
-
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
-    }
 }

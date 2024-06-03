@@ -25,7 +25,7 @@ public class MindlogController {
     }
 
     // 감정기록 추가
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<MindlogDTO> addMindlog(@RequestBody MindlogDTO mindlogDTO) {
 
         MindlogDTO addedMindlog = mindlogService.addMindlog(mindlogDTO);

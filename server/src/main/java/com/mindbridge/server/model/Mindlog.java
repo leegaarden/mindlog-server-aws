@@ -3,12 +3,16 @@ package com.mindbridge.server.model;
 import com.mindbridge.server.common.BaseEntity;
 import com.mindbridge.server.converter.StringListConverter;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 public class Mindlog extends BaseEntity {
 
@@ -68,84 +72,5 @@ public class Mindlog extends BaseEntity {
         this.eventRecord = eventRecord;
         this.questionRecord = questionRecord;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
-
-    public List<String> getMoods() {
-        return moods;
-    }
-
-    public void setMoods(List<String> moods) {
-        this.moods = moods;
-    }
-
-    public int getMoodColor() {
-        return moodColor;
-    }
-
-    public void setMoodColor(int moodColor) {
-        this.moodColor = moodColor;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getEmotionRecord() {
-        return emotionRecord;
-    }
-
-    public void setEmotionRecord(String emotionRecord) {
-        this.emotionRecord = emotionRecord;
-    }
-
-    public String getEventRecord() {
-        return eventRecord;
-    }
-
-    public void setEventRecord(String eventRecord) {
-        this.eventRecord = eventRecord;
-    }
-
-    public String getQuestionRecord() {
-        return questionRecord;
-    }
-
-    public void setQuestionRecord(String questionRecord) {
-        this.questionRecord = questionRecord;
-    }
-
-    public Appointment getAppointment() {
-        return appointment;
-    }
-
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
-    }
+    
 }
