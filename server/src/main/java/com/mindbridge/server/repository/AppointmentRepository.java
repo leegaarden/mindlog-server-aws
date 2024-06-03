@@ -20,9 +20,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     Optional<Appointment> findByRecordId(@Param("recordId") Long recordId);
 
     // 가장 최근의 appointment조회
-    @Query("SELECT a FROM Appointment a ORDER BY a.date DESC, a.startTime DESC")
+    @Query("select a from Appointment a order by a.date DESC, a.startTime DESC limit 1")
     Appointment findTopByOrderByDateDescStartTimeDesc();
 
-    // OpenNLP -> 쿼리문 대신
+
 
 }
