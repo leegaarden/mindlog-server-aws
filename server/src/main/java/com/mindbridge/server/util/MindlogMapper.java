@@ -21,6 +21,9 @@ public class MindlogMapper {
         mindlogDTO.setEmotionRecord(mindlog.getEmotionRecord());
         mindlogDTO.setEventRecord(mindlog.getEventRecord());
         mindlogDTO.setQuestionRecord(mindlog.getQuestionRecord());
+//        mindlogDTO.setAllRecord(mindlog.getEmotionRecord()
+//                + mindlog.getEventRecord()
+//                + mindlog.getQuestionRecord());
 
         if (mindlog.getAppointment() != null) {
             mindlogDTO.setAppointmentId(mindlog.getAppointment().getId());
@@ -43,8 +46,13 @@ public class MindlogMapper {
         mindlog.setEmotionRecord(mindlogDTO.getEmotionRecord());
         mindlog.setEventRecord(mindlogDTO.getEventRecord());
         mindlog.setQuestionRecord(mindlogDTO.getQuestionRecord());
+        mindlog.setAllRecord(mindlogDTO.getEmotionRecord()
+                + mindlogDTO.getEventRecord()
+                + mindlog.getQuestionRecord());
 
         return mindlog;
 
     }
+
+
 }

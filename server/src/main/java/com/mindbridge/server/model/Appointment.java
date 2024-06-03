@@ -49,7 +49,7 @@ public class Appointment extends BaseEntity {
     @JoinColumn(name = "record_id")
     private Record record;
 
-    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "appointment" /*cascade = CascadeType.ALL, orphanRemoval = true */)
     private List<Mindlog> mindlogs = new ArrayList<>();
 
     // default 생성자

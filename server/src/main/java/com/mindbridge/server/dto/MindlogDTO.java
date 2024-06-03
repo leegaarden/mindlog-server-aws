@@ -26,4 +26,5 @@ public class MindlogDTO {
     private String eventRecord;
     private String questionRecord;
     private Long appointmentId;
+    // private String allRecord;
 }

@@ -58,6 +58,10 @@ public class Mindlog extends BaseEntity {
     @JoinColumn(name = "appointment_id", nullable = true)
     private Appointment appointment;
 
+     //기록 총정리
+    @Column(columnDefinition = "TEXT", nullable = true)
+    private String allRecord;
+
     // default 생성자
     public Mindlog() {
     }

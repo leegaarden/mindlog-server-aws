@@ -15,4 +15,16 @@ public interface MindlogRepository extends JpaRepository<Mindlog, Long> {
     // 진료 아이디별 mindlog 조회
     @Query("SELECT m FROM Mindlog m WHERE m.appointment.id = :appointmentId ORDER BY m.createdAt ASC")
     List<Mindlog> findByAppointmentIdOrderByCreatedAtAsc(@Param("appointmentId") Long appointmentId);
+
+    // allRecord 조회
+    @Query("SELECT m.allRecord FROM Mindlog m")
+    List<String> findAllRecords();
+
+    // 부정 감정 기록 조회 -> moodColor가 1, 2
+    @Query("SELECT m.emotionRecord FROM Mindlog m WHERE m.moodColor = 1 or m.moodColor = 2")
+    List<String> findByNegativeMindlogs();
+
+    // 긍정 감정 기록 조회 -> moodColor가 4, 5
+    @Query("SELECT m.emotionRecord FROM Mindlog m WHERE m.moodColor = 4 or m.moodColor = 5")
+    List<String> findByPositiveMindlogs();
 }
