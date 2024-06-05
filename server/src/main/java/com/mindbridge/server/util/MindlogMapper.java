@@ -21,9 +21,9 @@ public class MindlogMapper {
         mindlogDTO.setEmotionRecord(mindlog.getEmotionRecord());
         mindlogDTO.setEventRecord(mindlog.getEventRecord());
         mindlogDTO.setQuestionRecord(mindlog.getQuestionRecord());
-//        mindlogDTO.setAllRecord(mindlog.getEmotionRecord()
-//                + mindlog.getEventRecord()
-//                + mindlog.getQuestionRecord());
+        mindlogDTO.setAllRecord(mindlog.getEmotionRecord()
+                + mindlog.getEventRecord()
+                + mindlog.getQuestionRecord());
 
         if (mindlog.getAppointment() != null) {
             mindlogDTO.setAppointmentId(mindlog.getAppointment().getId());
