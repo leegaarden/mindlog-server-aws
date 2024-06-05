@@ -15,9 +15,8 @@ public class StatsController {
 
     /*
     * 구현 필요 기능
-    * 1. 이럴 때 기분이  안 좋았어요 - mindlog의 moodColor이 1,2 인 것의 요약
-    * 2. 이럴 때 기분이 좋았어요 - mindlog의 moodColor이 4,5 인 것의 요약
-    * => 요약문의 기준이 뭔가요? 감정, 사건, 질문인가요 아니면 전체인가요?
+    * 1. 이럴 때 기분이  안 좋았어요 - mindlog의 moodColor이 1,2 인 emotionRecord, eventRecord의 요약
+    * 2. 이럴 때 기분이 좋았어요 - mindlog의 moodColor이 4,5 인 emotionRecord, eventRecord의 요약
     * 3. 키워드 추출 -> 세 가지 기록 전체 갖고오기
     * */
 
@@ -28,7 +27,7 @@ public class StatsController {
     private MindlogRepository mindlogRepository;
 
 
-    @PostMapping("/keyword")
+    @GetMapping("/keyword")
     public String sendDataToFastAPI() {
         // FastAPI로 데이터 전송
         statsService.sendDataToFastAPI();
