@@ -10,6 +10,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.CacheRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +29,9 @@ public class StatsService {
         this.restTemplate = restTemplate;
     }
 
+    // 추출된 키워드를 저장할 필드
+    private List<String> extractedKeywords;
+
     // 키워드 추출 FastAPI
     public void sendDataToFastAPI() {
         // FastAPI 엔드포인트 URL
@@ -41,9 +47,22 @@ public class StatsService {
         // 요청 바디 설정
         HttpEntity<List<String>> requestEntity = new HttpEntity<>(data, headers);
 
-        // FastAPI에 POST 요청 보내기
-        restTemplate.postForObject(fastApiUrl, requestEntity, String.class);
+        // FastAPI에 POST 요청 보내기 및 응답 받기
+        List<String> response = restTemplate.postForObject(fastApiUrl, requestEntity, List.class);
+
+        // 응답 데이터 저장 및 로그 출력
+        if (response != null) {
+            extractedKeywords = response;
+            response.forEach(keyword -> System.out.println("Extracted keyword: " + keyword));
+        } else {
+            System.out.println("No keywords extracted");
+        }
     }
+
+    public List<String> getExtractedKeywords() {
+        return extractedKeywords;
+    }
+
 
     // 부정 감정 기록 조회
     public List<String> getMindlogByNegativeMood () {

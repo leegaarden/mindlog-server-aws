@@ -7,6 +7,7 @@ import com.mindbridge.server.service.StatsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -28,11 +29,14 @@ public class StatsController {
 
 
     @GetMapping("/keyword")
-    public String sendDataToFastAPI() {
+    public List<String> getExtractedKeywords() {
         // FastAPI로 데이터 전송
         statsService.sendDataToFastAPI();
-        return "Data sent to FastAPI successfully!";
+        System.out.println("Data sent to FastAPI successfully!");
+        // 추출된 키워드 반환
+        return statsService.getExtractedKeywords();
     }
+
 
     // 일단 부정, 긍정 내용 조회하는 기능 만들기 -> 요약 api 되면 요약 데이터로 바꾸기
     @GetMapping("/negative")

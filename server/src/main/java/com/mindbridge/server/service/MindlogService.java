@@ -39,6 +39,8 @@ public class MindlogService {
     }
 
 
+
+
     // 감정 기록 추가
     public MindlogDTO addMindlog(MindlogDTO mindlogDTO) {
         Mindlog mindlog = mindlogMapper.toEntity(mindlogDTO);

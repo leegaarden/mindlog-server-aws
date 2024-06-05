@@ -4,6 +4,8 @@ import com.mindbridge.server.dto.MindlogDTO;
 import com.mindbridge.server.model.Mindlog;
 import org.springframework.stereotype.Component;
 
+
+
 @Component
 public class MindlogMapper {
 
@@ -22,8 +24,8 @@ public class MindlogMapper {
         mindlogDTO.setEventRecord(mindlog.getEventRecord());
         mindlogDTO.setQuestionRecord(mindlog.getQuestionRecord());
         mindlogDTO.setAllRecord(mindlog.getEmotionRecord()
-                + mindlog.getEventRecord()
-                + mindlog.getQuestionRecord());
+                + " " + mindlog.getEventRecord()
+                + " " + mindlog.getQuestionRecord());
 
         if (mindlog.getAppointment() != null) {
             mindlogDTO.setAppointmentId(mindlog.getAppointment().getId());
@@ -47,8 +49,8 @@ public class MindlogMapper {
         mindlog.setEventRecord(mindlogDTO.getEventRecord());
         mindlog.setQuestionRecord(mindlogDTO.getQuestionRecord());
         mindlog.setAllRecord(mindlogDTO.getEmotionRecord()
-                + mindlogDTO.getEventRecord()
-                + mindlog.getQuestionRecord());
+                + " " + mindlogDTO.getEventRecord()
+                + " " + mindlog.getQuestionRecord());
 
         return mindlog;
 

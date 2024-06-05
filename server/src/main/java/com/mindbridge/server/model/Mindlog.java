@@ -66,16 +66,5 @@ public class Mindlog extends BaseEntity {
     public Mindlog() {
     }
 
-    public Mindlog(Long id, Date date, LocalTime time, List<String> moods, int moodColor, String title, String emotionRecord, String eventRecord, String questionRecord) {
-        this.id = id;
-        this.date = date;
-        this.time = time;
-        this.moods = moods;
-        this.moodColor = moodColor;
-        this.title = title;
-        this.emotionRecord = emotionRecord;
-        this.eventRecord = eventRecord;
-        this.questionRecord = questionRecord;
-    }
     
 }
