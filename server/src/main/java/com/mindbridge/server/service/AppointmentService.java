@@ -1,19 +1,24 @@
 package com.mindbridge.server.service;
 
 import com.mindbridge.server.dto.AppointmentDTO;
+import com.mindbridge.server.dto.MindlogDTO;
 import com.mindbridge.server.dto.RecordDTO;
 import com.mindbridge.server.exception.ResourceNotFoundException;
 import com.mindbridge.server.model.Appointment;
+import com.mindbridge.server.model.Mindlog;
 import com.mindbridge.server.model.Record;
 import com.mindbridge.server.repository.AppointmentRepository;
+import com.mindbridge.server.repository.MindlogRepository;
 import com.mindbridge.server.repository.RecordRepository;
 import com.mindbridge.server.util.AppointmentMapper;
+import com.mindbridge.server.util.MindlogMapper;
 import com.mindbridge.server.util.RecordMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,6 +38,14 @@ public class AppointmentService {
     @Autowired
     private RecordRepository recordRepository;
 
+    @Autowired
+    private MindlogRepository mindlogRepository;
+
+    @Autowired
+    private MindlogMapper mindlogMapper;
+
+    @Autowired
+    private MindlogService mindlogService;
     // 전부 조회
     public List<AppointmentDTO> getAllAppointments() {
         List<Appointment> appointments = appointmentRepository.findAll();
@@ -65,10 +78,26 @@ public class AppointmentService {
     // 진료 수정
     public AppointmentDTO updateAppointment(Long id, AppointmentDTO appointmentDTO) {
         if (appointmentRepository.existsById(id)) {
+            Appointment appointment1 = appointmentRepository.findById(id).orElse(null);
+            AppointmentDTO appointmentDTO1 = appointmentMapper.toDTO(appointment1);
             Appointment appointment = appointmentMapper.toEntity(appointmentDTO);
             appointment.setId(id);
+
             Appointment updatedAppointment = appointmentRepository.save(appointment);
-            return appointmentMapper.toDTO(updatedAppointment);
+            AppointmentDTO updateAppointmentDTO = appointmentMapper.toDTO(updatedAppointment);
+
+            // 감정 기록들 수정하기
+            if (appointment.getMindlogs() != null) {
+                for (MindlogDTO mindlogDTO : appointmentDTO1.getMindlogDTOs()) {
+                    MindlogDTO saveMindlogDTO = mindlogService.updateMindlog(mindlogDTO.getId(), mindlogDTO);
+                    updateAppointmentDTO.getMindlogDTOs().add(saveMindlogDTO);
+                    System.out.println("감정 기록도 수정됨");
+                }
+            }
+
+
+
+            return updateAppointmentDTO;
         } else {
             return null;
         }

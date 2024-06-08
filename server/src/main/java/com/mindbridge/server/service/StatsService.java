@@ -1,19 +1,19 @@
 package com.mindbridge.server.service;
 
-import com.mindbridge.server.dto.MindlogDTO;
-import com.mindbridge.server.model.Mindlog;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mindbridge.server.repository.MindlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.CacheRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +31,7 @@ public class StatsService {
 
     // 추출된 키워드를 저장할 필드
     private List<String> extractedKeywords;
+
 
     // 키워드 추출 FastAPI
     public void sendDataToFastAPI() {
@@ -59,6 +60,7 @@ public class StatsService {
         }
     }
 
+    // 추출한 키워드 클라이언트로
     public List<String> getExtractedKeywords() {
         return extractedKeywords;
     }

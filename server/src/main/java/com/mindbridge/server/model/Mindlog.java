@@ -2,6 +2,7 @@ package com.mindbridge.server.model;
 
 import com.mindbridge.server.common.BaseEntity;
 import com.mindbridge.server.converter.StringListConverter;
+import com.mindbridge.server.service.SummaryService;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.util.List;
 @Setter
 @Entity
 public class Mindlog extends BaseEntity {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,13 +60,33 @@ public class Mindlog extends BaseEntity {
     @JoinColumn(name = "appointment_id", nullable = true)
     private Appointment appointment;
 
-     //기록 총정리
+     // 기록 총정리
     @Column(columnDefinition = "TEXT", nullable = true)
     private String allRecord;
+
+    // 통계용 기록 정리 -> emotion + event
+    @Column(columnDefinition = "TEXT", nullable = true)
+    private String emotionEvent;
+
+    // 감정 기록 요약
+    @Column(columnDefinition = "TEXT")
+    private String emotionSummary;
+
+    // 이벤트 기록 요약
+    @Column(columnDefinition = "TEXT")
+    private String eventSummary;
+
+    // 질문 기록 요약
+    @Column(columnDefinition = "TEXT")
+    private String questionSummary ;
+
+    // 통계용 기록 요약
+    @Column(columnDefinition = "TEXT")
+    private String emotionEventSummary;
+
 
     // default 생성자
     public Mindlog() {
     }
 
-    
 }

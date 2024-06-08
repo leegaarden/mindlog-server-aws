@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RecordMapper {
 
+   public RecordMapper() {}
+
     // Record -> RecordDTO
     public RecordDTO toDTO(Record record) {
 

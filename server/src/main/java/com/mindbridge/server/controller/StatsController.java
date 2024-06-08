@@ -28,6 +28,7 @@ public class StatsController {
     private MindlogRepository mindlogRepository;
 
 
+    // 키워드 추출
     @GetMapping("/keyword")
     public List<String> getExtractedKeywords() {
         // FastAPI로 데이터 전송

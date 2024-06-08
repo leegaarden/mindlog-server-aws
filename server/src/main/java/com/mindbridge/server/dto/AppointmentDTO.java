@@ -1,13 +1,13 @@
 package com.mindbridge.server.dto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
 
 import java.time.LocalTime;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,5 +22,6 @@ public class AppointmentDTO {
     private String hospital;
     private String memo;
     private Long recordId;
-    private MindlogDTO mindlogDTO;
+    private List<MindlogDTO> mindlogDTOs = new ArrayList<>();
+
 }
