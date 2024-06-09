@@ -1,6 +1,8 @@
 package com.mindbridge.server.controller;
 
 import com.mindbridge.server.dto.MindlogDTO;
+import com.mindbridge.server.model.Appointment;
+import com.mindbridge.server.repository.AppointmentRepository;
 import com.mindbridge.server.repository.MindlogRepository;
 import com.mindbridge.server.service.MindlogService;
 import com.mindbridge.server.service.StatsService;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,6 +27,9 @@ public class MindlogController {
 
     @Autowired
     private SummaryService summaryService;
+
+    @Autowired
+    private AppointmentRepository appointmentRepository;
 
     // 감정 기록 전체 조회
     @GetMapping
@@ -81,9 +87,13 @@ public class MindlogController {
     }
 
     // 감정 기록 조회(진료 일정별) -> 모아보기
-    @GetMapping("/appointment/{appointmentId}")
-    public List<MindlogDTO> getMindlogsByAppointmentId(@PathVariable Long appointmentId) {
-        return mindlogService.getMindlogsByAppointmentId(appointmentId);
+//    @GetMapping("/appointment/{appointmentId}")
+//    public List<MindlogDTO> getMindlogsByAppointmentId(@PathVariable Long appointmentId) {
+//        return mindlogService.getMindlogsByAppointmentId(appointmentId);
+//    }
+    @GetMapping("/by-appointment")
+    public List<List<MindlogDTO>> getMindlogsByAppointmentIdByDate() {
+        return mindlogService.getMindlogsByAppointmentIdByDate();
     }
 
     // 감정 기록 수정

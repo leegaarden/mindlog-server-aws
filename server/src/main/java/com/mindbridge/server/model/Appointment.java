@@ -4,6 +4,8 @@ import com.mindbridge.server.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalTime;
 import java.sql.Date;
@@ -14,6 +16,7 @@ import java.util.List;
 @Setter
 @Entity
 public class Appointment extends BaseEntity {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,14 +59,9 @@ public class Appointment extends BaseEntity {
     public Appointment() {
     }
 
-    public Appointment(Long id, Date date, LocalTime startTime, LocalTime endTime, String doctorName, String hospital, String memo) {
+    public Appointment(Long id) {
         this.id = id;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.doctorName = doctorName;
-        this.hospital = hospital;
-        this.memo = memo;
+        this.startTime = LocalTime.of(0, 0);
+        this.endTime = LocalTime.of(0, 0);
     }
-
 }

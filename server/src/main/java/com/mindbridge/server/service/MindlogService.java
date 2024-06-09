@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -111,7 +112,16 @@ public class MindlogService {
         Pageable pageable = PageRequest.of(0, 1); // limit 1
         List<Appointment> appointments =
                 appointmentRepository.findAppointmentsBeforeRecordTime(mindlog.getDate(),pageable);
-        Appointment appointment = appointments.isEmpty() ? null : appointments.get(0);
+
+        Appointment appointment;
+        if (appointments.isEmpty()) {
+            // Appointment 생성을 위한 필수 데이터 설정
+            appointment = new Appointment(0l);
+            appointment.setDate(mindlog.getDate());
+            appointment = appointmentRepository.save(appointment);
+        } else {
+            appointment = appointments.get(0);
+        }
 
         mindlog.setAppointment(appointment);
         Mindlog savedMindlog = mindlogRepository.save(mindlog);
@@ -141,6 +151,20 @@ public class MindlogService {
                 .map(mindlogMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    // 모아보기 전체 조회
+    public List<List<MindlogDTO>> getMindlogsByAppointmentIdByDate() {
+        List<Appointment> appointments = appointmentRepository.findAll();
+        List<List<MindlogDTO>> returnMindlogDTOs = new ArrayList<>();
+
+        for (Appointment appointment : appointments) {
+            Long appointmentId = appointment.getId();
+            List<MindlogDTO> mindlogDTOs = getMindlogsByAppointmentId(appointmentId);
+            returnMindlogDTOs.add(mindlogDTOs);
+        }
+
+        return returnMindlogDTOs;
+    }
     // 감정 기록 수정
     public MindlogDTO updateMindlog(Long id, MindlogDTO mindlogDTO) {
         if (mindlogRepository.existsById(id)) {
@@ -150,7 +174,16 @@ public class MindlogService {
             Pageable pageable = PageRequest.of(0, 1); // limit 1
             List<Appointment> appointments =
                     appointmentRepository.findAppointmentsBeforeRecordTime(mindlog.getDate(),pageable);
-            Appointment appointment = appointments.isEmpty() ? null : appointments.get(0);
+
+            Appointment appointment;
+            if (appointments.isEmpty()) {
+                // Appointment 생성을 위한 필수 데이터 설정
+                appointment = new Appointment(0l);
+                appointment.setDate(mindlog.getDate());
+                appointment = appointmentRepository.save(appointment);
+            } else {
+                appointment = appointments.get(0);
+            }
 
             mindlog.setAppointment(appointment);
             Mindlog updatedMindlog = mindlogRepository.save(mindlog);
