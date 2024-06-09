@@ -22,11 +22,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     @Query("SELECT a FROM Appointment a WHERE a.record.id = :recordId")
     Optional<Appointment> findByRecordId(@Param("recordId") Long recordId);
 
-//    @Query("SELECT NULLIF(Appointment, 0) FROM Appointment a WHERE a.date > :mindlogDate ORDER BY a.startTime DESC limit 1")
-//    Appointment findAppointmentsBeforeRecordTime(@Param("mindlogDate") Date mindlogDate);
-
     // 특정 감정기록 작성 날짜 이전의 진료 값 중 가장 최신의 진료 일정 조회
-    @Query("SELECT a FROM Appointment a WHERE a.date > :mindlogDate ORDER BY a.startTime DESC")
+    @Query("SELECT a FROM Appointment a WHERE a.date > :mindlogDate ORDER BY a.startTime")
     List<Appointment> findAppointmentsBeforeRecordTime(@Param("mindlogDate") Date mindlogDate, Pageable pageable);
 
     // 전체 조회문 수정(생성 일시별로에서 진료 일정 별로)

@@ -1,21 +1,13 @@
 package com.mindbridge.server.controller;
 
 import com.mindbridge.server.dto.MindlogDTO;
-import com.mindbridge.server.model.Appointment;
-import com.mindbridge.server.repository.AppointmentRepository;
-import com.mindbridge.server.repository.MindlogRepository;
 import com.mindbridge.server.service.MindlogService;
-import com.mindbridge.server.service.StatsService;
-import com.mindbridge.server.service.SummaryService;
-import com.mindbridge.server.util.MindlogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,12 +16,6 @@ public class MindlogController {
 
     @Autowired
     private MindlogService mindlogService;
-
-    @Autowired
-    private SummaryService summaryService;
-
-    @Autowired
-    private AppointmentRepository appointmentRepository;
 
     // 감정 기록 전체 조회
     @GetMapping

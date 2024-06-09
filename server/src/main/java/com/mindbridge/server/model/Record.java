@@ -31,10 +31,4 @@ public class Record extends BaseEntity {
     public Record() {
     }
 
-    public Record(Long id, String filePath, String summary) {
-        this.id = id;
-        this.filePath = filePath;
-        this.summary = summary;
-    }
-
 }

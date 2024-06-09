@@ -5,7 +5,6 @@ import com.mindbridge.server.dto.MindlogDTO;
 import com.mindbridge.server.dto.RecordDTO;
 import com.mindbridge.server.exception.ResourceNotFoundException;
 import com.mindbridge.server.model.Appointment;
-import com.mindbridge.server.model.Mindlog;
 import com.mindbridge.server.model.Record;
 import com.mindbridge.server.repository.AppointmentRepository;
 import com.mindbridge.server.repository.MindlogRepository;
@@ -13,12 +12,10 @@ import com.mindbridge.server.repository.RecordRepository;
 import com.mindbridge.server.util.AppointmentMapper;
 import com.mindbridge.server.util.MindlogMapper;
 import com.mindbridge.server.util.RecordMapper;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,11 +35,6 @@ public class AppointmentService {
     @Autowired
     private RecordRepository recordRepository;
 
-    @Autowired
-    private MindlogRepository mindlogRepository;
-
-    @Autowired
-    private MindlogMapper mindlogMapper;
 
     @Autowired
     private MindlogService mindlogService;
@@ -94,8 +86,6 @@ public class AppointmentService {
                     System.out.println("감정 기록도 수정됨");
                 }
             }
-
-
 
             return updateAppointmentDTO;
         } else {

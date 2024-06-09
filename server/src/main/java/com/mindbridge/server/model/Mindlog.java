@@ -2,7 +2,6 @@ package com.mindbridge.server.model;
 
 import com.mindbridge.server.common.BaseEntity;
 import com.mindbridge.server.converter.StringListConverter;
-import com.mindbridge.server.service.SummaryService;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

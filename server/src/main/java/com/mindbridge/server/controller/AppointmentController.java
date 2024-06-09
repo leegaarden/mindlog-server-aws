@@ -1,8 +1,6 @@
 package com.mindbridge.server.controller;
 
 import com.mindbridge.server.dto.AppointmentDTO;
-import com.mindbridge.server.dto.RecordDTO;
-import com.mindbridge.server.model.Record;
 import com.mindbridge.server.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,7 +78,6 @@ public class AppointmentController {
         System.out.println("진료 조회(녹음): " + recordId);
         return appointmentDTO;
     }
-
 
 
     // 진료 수정

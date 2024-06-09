@@ -22,18 +22,9 @@ import java.util.function.Function;
 @Component
 public class AppointmentMapper {
 
-//    private final RecordMapper recordMapper;
-//
-//
-//    public AppointmentMapper(RecordMapper recordMapper) {
-//        this.recordMapper = recordMapper;
-//    }
-
     MindlogMapper mindlogMapper = new MindlogMapper();
-
-    RecordService recordService = new RecordService();
-
     RecordMapper recordMapper = new RecordMapper();
+    RecordService recordService = new RecordService();
 
 
     // Appointment -> AppointmentDTO
@@ -76,15 +67,15 @@ public class AppointmentMapper {
         appointment.setHospital(appointmentDTO.getHospital());
         appointment.setMemo((appointmentDTO.getMemo()));
 
-//        if (appointmentDTO.getMindlogDTOs() != null) {
-//            for (Mindlog mindlog : appointment.getMindlogs()) {
-//                appointment.getMindlogs().add(mindlogMapper.toEntity(mindlogDTO));
-//            }
-//        }
-//
-//        if (appointmentDTO.getRecordId() != null) {
-//            appointment.setRecord(recordMapper.toEntity(recordService.getRecordById(appointmentDTO.getRecordId())));
-//        }
+        if (appointmentDTO.getMindlogDTOs() != null) {
+            for (MindlogDTO mindlogDTO : appointmentDTO.getMindlogDTOs()) {
+                appointment.getMindlogs().add(mindlogMapper.toEntity(mindlogDTO));
+            }
+        }
+
+        if (appointmentDTO.getRecordId() != null) {
+            appointment.setRecord(recordMapper.toEntity(recordService.getRecordById(appointmentDTO.getRecordId())));
+        }
 
 
         return appointment;

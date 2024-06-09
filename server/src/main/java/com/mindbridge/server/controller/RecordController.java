@@ -65,16 +65,6 @@ public class RecordController {
         return recordService.getRecordById(id);
     }
 
-    // 녹음 재생 ( appoinment 개별 조회했을 때 path 전달 -> 걍 path만 전달
-//    @GetMapping(value = "/{id}/play", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-//    public ResponseEntity<byte[]> playRecord(@PathVariable Long id) {
-//        byte[] fileContent = recordService.getRecordFileContent(id);
-//        if (fileContent != null) {
-//            return ResponseEntity.ok().body(fileContent);
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//        }
-//    }
 
     // 녹음 삭제
     @DeleteMapping("/{id}")

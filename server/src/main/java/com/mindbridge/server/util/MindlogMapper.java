@@ -2,7 +2,6 @@ package com.mindbridge.server.util;
 
 import com.mindbridge.server.dto.MindlogDTO;
 import com.mindbridge.server.model.Mindlog;
-import com.mindbridge.server.service.SummaryService;
 import org.springframework.stereotype.Component;
 
 
