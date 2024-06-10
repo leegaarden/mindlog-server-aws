@@ -73,14 +73,14 @@ public class MindlogController {
     }
 
     // 감정 기록 조회(진료 일정별) -> 모아보기
-//    @GetMapping("/appointment/{appointmentId}")
-//    public List<MindlogDTO> getMindlogsByAppointmentId(@PathVariable Long appointmentId) {
-//        return mindlogService.getMindlogsByAppointmentId(appointmentId);
-//    }
-    @GetMapping("/by-appointment")
-    public List<List<MindlogDTO>> getMindlogsByAppointmentIdByDate() {
-        return mindlogService.getMindlogsByAppointmentIdByDate();
+    @GetMapping("/appointment/{appointmentId}")
+    public List<MindlogDTO> getMindlogsByAppointmentId(@PathVariable Long appointmentId) {
+        return mindlogService.getMindlogsByAppointmentId(appointmentId);
     }
+//    @GetMapping("/by-appointment")
+//    public List<List<MindlogDTO>> getMindlogsByAppointmentIdByDate() {
+//        return mindlogService.getMindlogsByAppointmentIdByDate();
+//    }
 
     // 감정 기록 수정
     @PutMapping("/{id}")

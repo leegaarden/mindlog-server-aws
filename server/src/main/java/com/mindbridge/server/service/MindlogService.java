@@ -120,18 +120,18 @@ public class MindlogService {
     }
 
     // 모아보기 전체 조회
-    public List<List<MindlogDTO>> getMindlogsByAppointmentIdByDate() {
-        List<Appointment> appointments = appointmentRepository.findAll();
-        List<List<MindlogDTO>> returnMindlogDTOs = new ArrayList<>();
-
-        for (Appointment appointment : appointments) {
-            Long appointmentId = appointment.getId();
-            List<MindlogDTO> mindlogDTOs = getMindlogsByAppointmentId(appointmentId);
-            returnMindlogDTOs.add(mindlogDTOs);
-        }
-
-        return returnMindlogDTOs;
-    }
+//    public List<List<MindlogDTO>> getMindlogsByAppointmentIdByDate() {
+//        List<Appointment> appointments = appointmentRepository.findAll();
+//        List<List<MindlogDTO>> returnMindlogDTOs = new ArrayList<>();
+//
+//        for (Appointment appointment : appointments) {
+//            Long appointmentId = appointment.getId();
+//            List<MindlogDTO> mindlogDTOs = getMindlogsByAppointmentId(appointmentId);
+//            returnMindlogDTOs.add(mindlogDTOs);
+//        }
+//
+//        return returnMindlogDTOs;
+//    }
     // 감정 기록 수정
     public MindlogDTO updateMindlog(Long id, MindlogDTO mindlogDTO) {
 
