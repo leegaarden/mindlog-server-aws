@@ -70,16 +70,23 @@ public class StatsService {
     public List<String> getRecordsSummarys(List<String> records) {
 
         List<String> recordsSummarys = new ArrayList<>();
+        int start = 0;
+        int end = 0;
+        String str = "";
 
         for (String record : records) {
-            String[] data = record.split("\n");
-
-            int size = data.length;
-            for (int i = 0; i < size; i++) {
-                int j = data[i].indexOf("-");
-                data[i] = data[i].substring(j + 2);
-                recordsSummarys.add(data[i]);
-            }
+//            String[] data = record.split("\n");
+//
+//            int size = data.length;
+//            for (int i = 0; i < size; i++) {
+//                int j = data[i].indexOf("-");
+//                data[i] = data[i].substring(j + 2);
+//                recordsSummarys.add(data[i]);
+//            }
+            start = record.indexOf("-");
+            end = record.indexOf("\n");
+            str = record.substring(start + 2, end);
+            recordsSummarys.add(str);
 
         }
         return recordsSummarys;
