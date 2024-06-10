@@ -14,9 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.CacheRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,16 +66,85 @@ public class StatsService {
         return extractedKeywords;
     }
 
+    public List<String> getrecordsSummarys(List<String> records) {
+
+        List<String> recordsSummarys = new ArrayList<>();
+
+        for (String record : records) {
+            String[] data = record.split("\n");
+
+            int size = data.length;
+            for (int i = 0; i < size; i++) {
+                int j = data[i].indexOf("-");
+                data[i] = data[i].substring(j + 2);
+                recordsSummarys.add(data[i]);
+            }
+
+        }
+
+
+        return recordsSummarys;
+    }
 
     // 부정 감정 기록 조회
     public List<String> getMindlogByNegativeMood () {
-        List<String> negativeRecords = mindlogRepository.findByNegativeMindlogs();
+
+        List<String> records = mindlogRepository.findByNegativeMindlogs(); // \n 포함된 거
+        List<String> recordsSummarys = getrecordsSummarys(records); // \n 없앤 거
+        List<String> negativeRecords = new ArrayList<>(); // return
+
+        int recordsSummarysSize = recordsSummarys.size();
+
+        Random random = new Random();
+        List<Integer> idx = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            int g = random.nextInt(recordsSummarysSize);
+            idx.add(g);
+
+            for (int j = 0; j < i; j++) { // 중복 제거
+                if (idx.get(i) == idx.get(j)) {
+                    i--;
+                    break;
+                }
+            }
+        }
+
+        negativeRecords.add(recordsSummarys.get(idx.get(0)));
+        negativeRecords.add(recordsSummarys.get(idx.get(1)));
+        negativeRecords.add(recordsSummarys.get(idx.get(2)));
+
         return negativeRecords;
+
     }
 
     // 긍정 감정 기록 조회
     public List<String> getMindlogByPositiveMood () {
-        List<String> positiveRecords = mindlogRepository.findByPositiveMindlogs();
+        List<String> records = mindlogRepository.findByPositiveMindlogs();
+        List<String> recordsSummarys = getrecordsSummarys(records); // \n 없앤 거
+        List<String> positiveRecords = new ArrayList<>(); // return
+
+        int recordsSummarysSize = recordsSummarys.size();
+
+        Random random = new Random();
+        List<Integer> idx = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            int g = random.nextInt(recordsSummarysSize);
+            idx.add(g);
+
+            for (int j = 0; j < i; j++) { // 중복 제거
+                if (idx.get(i) == idx.get(j)) {
+                    i--;
+                    break;
+                }
+            }
+        }
+
+        positiveRecords.add(recordsSummarys.get(idx.get(0)));
+        positiveRecords.add(recordsSummarys.get(idx.get(1)));
+        positiveRecords.add(recordsSummarys.get(idx.get(2)));
+
         return positiveRecords;
     }
 
