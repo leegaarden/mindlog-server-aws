@@ -66,7 +66,8 @@ public class StatsService {
         return extractedKeywords;
     }
 
-    public List<String> getrecordsSummarys(List<String> records) {
+    // -와 \n 제거하기
+    public List<String> getRecordsSummarys(List<String> records) {
 
         List<String> recordsSummarys = new ArrayList<>();
 
@@ -81,71 +82,39 @@ public class StatsService {
             }
 
         }
-
-
         return recordsSummarys;
     }
-
-    // 부정 감정 기록 조회
-    public List<String> getMindlogByNegativeMood () {
-
-        List<String> records = mindlogRepository.findByNegativeMindlogs(); // \n 포함된 거
-        List<String> recordsSummarys = getrecordsSummarys(records); // \n 없앤 거
-        List<String> negativeRecords = new ArrayList<>(); // return
-
-        int recordsSummarysSize = recordsSummarys.size();
-
-        Random random = new Random();
-        List<Integer> idx = new ArrayList<>();
-
-        for (int i = 0; i < 3; i++) {
-            int g = random.nextInt(recordsSummarysSize);
-            idx.add(g);
-
-            for (int j = 0; j < i; j++) { // 중복 제거
-                if (idx.get(i) == idx.get(j)) {
-                    i--;
-                    break;
-                }
-            }
+    private List<String> getRandomRecords(List<String> recordsSummary) {
+        int size = recordsSummary.size();
+        if (size <= 3) {
+            return new ArrayList<>(recordsSummary); // 모든 기록 반환
         }
 
-        negativeRecords.add(recordsSummarys.get(idx.get(0)));
-        negativeRecords.add(recordsSummarys.get(idx.get(1)));
-        negativeRecords.add(recordsSummarys.get(idx.get(2)));
+        Random random = new Random();
+        Set<Integer> indices = new HashSet<>();
 
-        return negativeRecords;
+        while (indices.size() < 3) {
+            indices.add(random.nextInt(size));
+        }
 
+        List<String> randomRecords = new ArrayList<>();
+        for (int index : indices) {
+            randomRecords.add(recordsSummary.get(index));
+        }
+
+        return randomRecords;
     }
 
-    // 긍정 감정 기록 조회
-    public List<String> getMindlogByPositiveMood () {
+    public List<String> getMindlogByNegativeMood() {
+        List<String> records = mindlogRepository.findByNegativeMindlogs();
+        List<String> recordsSummary = getRecordsSummarys(records);
+        return getRandomRecords(recordsSummary);
+    }
+
+    public List<String> getMindlogByPositiveMood() {
         List<String> records = mindlogRepository.findByPositiveMindlogs();
-        List<String> recordsSummarys = getrecordsSummarys(records); // \n 없앤 거
-        List<String> positiveRecords = new ArrayList<>(); // return
-
-        int recordsSummarysSize = recordsSummarys.size();
-
-        Random random = new Random();
-        List<Integer> idx = new ArrayList<>();
-
-        for (int i = 0; i < 3; i++) {
-            int g = random.nextInt(recordsSummarysSize);
-            idx.add(g);
-
-            for (int j = 0; j < i; j++) { // 중복 제거
-                if (idx.get(i) == idx.get(j)) {
-                    i--;
-                    break;
-                }
-            }
-        }
-
-        positiveRecords.add(recordsSummarys.get(idx.get(0)));
-        positiveRecords.add(recordsSummarys.get(idx.get(1)));
-        positiveRecords.add(recordsSummarys.get(idx.get(2)));
-
-        return positiveRecords;
+        List<String> recordsSummary = getRecordsSummarys(records);
+        return getRandomRecords(recordsSummary);
     }
 
 
