@@ -91,8 +91,10 @@ public class MindlogService {
             appointment = appointments.get(0);
         }
 
+        //appointment.setId(0l);
         mindlog.setAppointment(appointment);
         Mindlog savedMindlog = mindlogRepository.save(mindlog);
+        savedMindlog.getAppointment().setId(0l);
         return mindlogMapper.toDTO(savedMindlog);
     }
 

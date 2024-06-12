@@ -4,20 +4,8 @@ import com.mindbridge.server.dto.AppointmentDTO;
 import com.mindbridge.server.dto.MindlogDTO;
 import com.mindbridge.server.model.Appointment;
 import com.mindbridge.server.model.Mindlog;
-import com.mindbridge.server.model.Record;
-import com.mindbridge.server.repository.RecordRepository;
 import com.mindbridge.server.service.RecordService;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
 @Component
 public class AppointmentMapper {
