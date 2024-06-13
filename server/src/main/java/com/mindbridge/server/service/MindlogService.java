@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +32,8 @@ public class MindlogService {
 
     @Autowired
     private StatsService statsService;
+
+    private static final LocalTime ZERO_TIME = LocalTime.MIDNIGHT;
 
     // 전부 조회
     public List<MindlogDTO> getAllMindlogs() {
@@ -79,9 +82,10 @@ public class MindlogService {
 
         Pageable pageable = PageRequest.of(0, 1); // limit 1
         List<Appointment> appointments =
-                appointmentRepository.findAppointmentsBeforeRecordTime(mindlog.getDate(),pageable);
+                appointmentRepository.findAppointmentsBeforeRecordTime(mindlog.getDate(), ZERO_TIME, pageable);
 
-        Appointment appointment;
+        Appointment appointment = new Appointment();
+
         if (appointments.isEmpty()) {
             // Appointment 생성을 위한 필수 데이터 설정
             appointment = new Appointment(0l);
@@ -91,10 +95,10 @@ public class MindlogService {
             appointment = appointments.get(0);
         }
 
-        //appointment.setId(0l);
+        // appointment.setId(0l); -> 아이디 바꾸면 안 돼 시바라
         mindlog.setAppointment(appointment);
         Mindlog savedMindlog = mindlogRepository.save(mindlog);
-        savedMindlog.getAppointment().setId(0l);
+        // savedMindlog.getAppointment().setId(0l);
         return mindlogMapper.toDTO(savedMindlog);
     }
 
@@ -175,7 +179,7 @@ public class MindlogService {
             // 날짜 수정 기능 때문에 진료 일정이랑 비교해야 함
             Pageable pageable = PageRequest.of(0, 1); // limit 1
             List<Appointment> appointments =
-                    appointmentRepository.findAppointmentsBeforeRecordTime(mindlog.getDate(),pageable);
+                    appointmentRepository.findAppointmentsBeforeRecordTime(mindlog.getDate(), ZERO_TIME, pageable);
 
             Appointment appointment;
             if (appointments.isEmpty()) {

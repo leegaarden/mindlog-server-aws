@@ -56,7 +56,7 @@ public class Mindlog extends BaseEntity {
     private String questionRecord;
 
     // 진료 일정 아이디 연동
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "appointment_id", nullable = true)
     private Appointment appointment;
 

@@ -34,4 +34,8 @@ public interface MindlogRepository extends JpaRepository<Mindlog, Long> {
     // 요약 api 데이터 용
     @Query("SELECT m.emotionRecord, m.eventRecord, m.questionRecord FROM Mindlog m")
     List<String> fingSummaryData();
+
+    // 특정 날짜 이전 감정 기록들 조회
+    @Query ("SELECT m FROM Mindlog m WHERE m.date < :date")
+    List<Mindlog> findBeforeDate(@Param("date") Date date);
 }
