@@ -63,5 +63,8 @@ public class Appointment extends BaseEntity {
         this.id = id;
         this.startTime = LocalTime.of(0, 0);
         this.endTime = LocalTime.of(0, 0);
+        this.doctorName = "이정원";
+        this.hospital = "mindlog 병원";
+
     }
 }
