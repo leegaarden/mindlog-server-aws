@@ -52,7 +52,7 @@ public class AppointmentService {
     private static final LocalTime ZERO_TIME = LocalTime.MIDNIGHT;
     // 전부 조회
     public List<AppointmentDTO> getAllAppointments() {
-        List<Appointment> appointments = appointmentRepository.findAllExcludingZeroTime(ZERO_TIME);
+        List<Appointment> appointments = appointmentRepository.findAll();
         return appointments.stream()
                 .map(appointmentMapper::toDTO)
                 .collect(Collectors.toList());
