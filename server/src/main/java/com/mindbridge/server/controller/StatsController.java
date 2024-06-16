@@ -39,7 +39,7 @@ public class StatsController {
     }
 
 
-    // 일단 부정, 긍정 내용 조회하는 기능 만들기 -> 요약 api 되면 요약 데이터로 바꾸기
+    // 일단 부정, 긍정 내용 조회하는 기능
     @GetMapping("/negative")
     public List<String> getMindlogByNegativeMood () {
         return statsService.getMindlogByNegativeMood();

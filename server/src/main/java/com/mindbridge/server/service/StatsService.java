@@ -70,11 +70,9 @@ public class StatsService {
     public List<String> getRecordsSummarys(List<String> records) {
 
         List<String> recordsSummarys = new ArrayList<>();
-        int start = 0;
-        int end = 0;
-        String str = "";
 
-        for (String record : records) {
+        try {
+            for (String record : records) {
 //            String[] data = record.split("\n");
 //
 //            int size = data.length;
@@ -83,12 +81,18 @@ public class StatsService {
 //                data[i] = data[i].substring(j + 2);
 //                recordsSummarys.add(data[i]);
 //            }
-            start = record.indexOf("-");
-            end = record.indexOf("\n");
-            str = record.substring(start + 2, end);
-            recordsSummarys.add(str);
+                int start = record.indexOf("-");
+                int end = record.indexOf("\n");
+                String str = record.substring(start + 2, end);
+                recordsSummarys.add(str);
 
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            recordsSummarys.add(" ");
+            int i = recordsSummarys.indexOf(" ");
+            recordsSummarys.remove(i);
         }
+
         return recordsSummarys;
     }
     private List<String> getRandomRecords(List<String> recordsSummary) {
