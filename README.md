@@ -1,4 +1,4 @@
-# Mindlog | 정신 건강을 위한 생각 기록과 정신과 진료 기록 절차를 돕는 
+# Mindlog | 정신 건강을 위한 생각 기록과 정신과 진료 기록 절차를 돕는 iOS 서비스
 ![마인드로그목업](https://github.com/user-attachments/assets/0334f45c-c985-400d-9474-935c16f752f6)
 <br><br><br>
 
